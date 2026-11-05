@@ -1,40 +1,40 @@
 % 由 src/make_table_update_matched.py 生成。
 \begin{table}[!htbp]
 \centering
-\caption{Optimizer-update-matched supervised controls. The supervised-update-matched
-runs use the same labeled subsets and validation protocol as the main experiments,
-but their cosine schedule is extended to the Ours update count at each seed. Dice is
-patient-level mean\% $\pm$ std across seeds 42/43/44. Effect cells show the
-update-matched supervised-minus-reference difference in percentage points, with a
-95\% two-way cluster-bootstrap interval over patients and seeds and the maximum
-per-seed paired Wilcoxon $p$. These are exploratory robustness analyses with
-unadjusted $p$-values.}
+\caption{Optimizer-update-matched supervised controls. Control denotes the
+supervised-update-matched run. The controls use the same labeled subsets and
+validation protocol as the main experiments, but their cosine schedule is extended
+to the Ours update count at each seed. Dice is patient-level mean\% $\pm$ std
+across seeds 42/43/44. Comparison rows show the control-minus-reference tumor
+effect [95\% two-way cluster-bootstrap CI over patients and seeds] in the tumor
+column and the maximum per-seed paired Wilcoxon $p$ in the last column. These are
+exploratory robustness analyses with unadjusted $p$-values.}
 \label{tabS:update_matched}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lccc}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lcccc}
 \toprule
-Method / comparison & Updates & Tumor / effect [95\% CI] & Rectum / max-$p$ \\
+Method / comparison & Updates & Tumor Dice / effect [95\% CI] & Rectum Dice & Tumor max-$p$ \\
 \midrule
-\multicolumn{4}{l}{\textit{50\% labels}} \\
-Supervised-100ep & 29.9k & 64.65$\pm$0.37 & 63.13$\pm$0.84 \\
-ST & 117.0k & 65.89$\pm$1.84 & 62.90$\pm$2.10 \\
-Ours & 117.0k & 67.26$\pm$1.90 & 63.19$\pm$0.64 \\
-Supervised-update-matched & 117.1k & 64.08$\pm$0.98 & 63.16$\pm$0.47 \\
+\multicolumn{5}{l}{\textit{50\% labels}} \\
+Supervised-100ep & 29.9k & 64.65$\pm$0.37 & 63.13$\pm$0.84 & -- \\
+ST & 117.0k & 65.89$\pm$1.84 & 62.90$\pm$2.10 & -- \\
+Ours & 117.0k & 67.26$\pm$1.90 & 63.19$\pm$0.64 & -- \\
+Supervised-update-matched & 117.1k & 64.08$\pm$0.98 & 63.16$\pm$0.47 & -- \\
 \midrule
-Update-matched $-$ Supervised-100ep (tumor) & -- & -0.57 [-1.79,+0.78] & 0.174 \\
-Update-matched $-$ ST (tumor) & -- & -1.81 [-3.70,+0.04] & 0.871 \\
-Update-matched $-$ Ours (tumor) & -- & -3.18 [-5.36,-1.09] & 0.124 \\
+Control $-$ Supervised-100ep & -- & -0.57 [-1.79,+0.78] & -- & 0.174 \\
+Control $-$ ST & -- & -1.81 [-3.70,+0.04] & -- & 0.871 \\
+Control $-$ Ours & -- & -3.18 [-5.36,-1.09] & -- & 0.124 \\
 \midrule
-\multicolumn{4}{l}{\textit{1\% labels}} \\
-Supervised-100ep & 0.7k & 44.19$\pm$3.68 & 41.06$\pm$0.69 \\
-ST & 127.3k & 23.16$\pm$7.52 & 23.28$\pm$7.72 \\
-Ours & 127.3k & 33.17$\pm$2.15 & 13.40$\pm$13.03 \\
-Supervised-update-matched & 127.3k & 38.82$\pm$8.16 & 34.25$\pm$1.12 \\
+\multicolumn{5}{l}{\textit{1\% labels}} \\
+Supervised-100ep & 0.7k & 44.19$\pm$3.68 & 41.06$\pm$0.69 & -- \\
+ST & 127.3k & 23.16$\pm$7.52 & 23.28$\pm$7.72 & -- \\
+Ours & 127.3k & 33.17$\pm$2.15 & 13.40$\pm$13.03 & -- \\
+Supervised-update-matched & 127.3k & 38.82$\pm$8.16 & 34.25$\pm$1.12 & -- \\
 \midrule
-Update-matched $-$ Supervised-100ep (tumor) & -- & -5.38 [-10.70,+0.70] & 0.467 \\
-Update-matched $-$ ST (tumor) & -- & +15.66 [+2.97,+26.97] & 0.174 \\
-Update-matched $-$ Ours (tumor) & -- & +5.65 [-2.83,+16.34] & 0.934 \\
+Control $-$ Supervised-100ep & -- & -5.38 [-10.70,+0.70] & -- & 0.467 \\
+Control $-$ ST & -- & +15.66 [+2.97,+26.97] & -- & 0.174 \\
+Control $-$ Ours & -- & +5.65 [-2.83,+16.34] & -- & 0.934 \\
 \bottomrule
 \end{tabular}
 \end{table}

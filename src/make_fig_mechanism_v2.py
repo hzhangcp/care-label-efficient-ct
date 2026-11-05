@@ -153,14 +153,14 @@ def make_figure(datas, names, crop_size, out_paths, suptitle):
         axes = np.array([[grid[0, 0], grid[0, 1], grid[0, 2],
                           grid[1, 0], grid[1, 1]]])
         legend_ax = grid[1, 2]
-        title_fs, label_fs, sup_fs, legend_fs = 11, 9, 13, 9
+        title_fs, label_fs, sup_fs, legend_fs = 15, 14, 17, 13
     else:
         fig, axes = plt.subplots(n, 5, figsize=(14.8, 3.05 * n))
         legend_ax = None
         title_fs, label_fs, sup_fs, legend_fs = 9, 7, 10, 7
     titles = ["CT + GT contours", "Teacher confidence (stage-2)",
               "Confidence filter only",
-              "Confidence + cross-stage agreement",
+              "Confidence + agreement",
               "Pixels discarded by agreement\n(ignore mask)"]
     for i, data in enumerate(datas):
         image, gt = data["image"], data["gt"]

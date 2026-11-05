@@ -95,41 +95,42 @@ def tex_table(result):
     def comparison(ratio, reference):
         item = result["comparisons"][f"{ratio}/supupd_minus_{reference}/tumor"]
         lo, hi = item["ci95_twoway_boot"]
-        return (f"{100 * item['mean']:+.2f} [{100 * lo:+.2f},{100 * hi:+.2f}] & "
-                f"{fmt_p(item['p_max'])}")
+        effect = f"{100 * item['mean']:+.2f} [{100 * lo:+.2f},{100 * hi:+.2f}]"
+        return effect, fmt_p(item["p_max"])
 
     lines = []
     for ratio in RATIOS:
-        lines.append(f"\\multicolumn{{4}}{{l}}{{\\textit{{{ratio}\\% labels}}}} \\\\")
+        lines.append(f"\\multicolumn{{5}}{{l}}{{\\textit{{{ratio}\\% labels}}}} \\\\")
         for method in METHODS:
             update = result["updates"].get(f"{ratio}/{method}")
             update_text = "--" if update is None else f"{update / 1000:.1f}k"
             lines.append(f"{LABELS[method]} & {update_text} & {cell(ratio, method, 'tumor')} & "
-                         f"{cell(ratio, method, 'rectum')} \\\\")
+                         f"{cell(ratio, method, 'rectum')} & -- \\\\")
         lines.append("\\midrule")
         for reference in ["sup", "semi", "ours"]:
-            lines.append(f"Update-matched $-$ {LABELS[reference]} (tumor) & -- & "
-                         f"{comparison(ratio, reference)} \\\\")
+            lines.append(f"Control $-$ {LABELS[reference]} & -- & "
+                         f"{comparison(ratio, reference)[0]} & -- & "
+                         f"{comparison(ratio, reference)[1]} \\\\")
         if ratio != RATIOS[-1]:
             lines.append("\\midrule")
     body = "\n".join(lines)
     return r"""% 由 src/make_table_update_matched.py 生成。
 \begin{table}[!htbp]
 \centering
-\caption{Optimizer-update-matched supervised controls. The supervised-update-matched
-runs use the same labeled subsets and validation protocol as the main experiments,
-but their cosine schedule is extended to the Ours update count at each seed. Dice is
-patient-level mean\% $\pm$ std across seeds 42/43/44. Effect cells show the
-update-matched supervised-minus-reference difference in percentage points, with a
-95\% two-way cluster-bootstrap interval over patients and seeds and the maximum
-per-seed paired Wilcoxon $p$. These are exploratory robustness analyses with
-unadjusted $p$-values.}
+\caption{Optimizer-update-matched supervised controls. Control denotes the
+supervised-update-matched run. The controls use the same labeled subsets and
+validation protocol as the main experiments, but their cosine schedule is extended
+to the Ours update count at each seed. Dice is patient-level mean\% $\pm$ std
+across seeds 42/43/44. Comparison rows show the control-minus-reference tumor
+effect [95\% two-way cluster-bootstrap CI over patients and seeds] in the tumor
+column and the maximum per-seed paired Wilcoxon $p$ in the last column. These are
+exploratory robustness analyses with unadjusted $p$-values.}
 \label{tabS:update_matched}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lccc}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{lcccc}
 \toprule
-Method / comparison & Updates & Tumor / effect [95\% CI] & Rectum / max-$p$ \\
+Method / comparison & Updates & Tumor Dice / effect [95\% CI] & Rectum Dice & Tumor max-$p$ \\
 \midrule
 """ + body + r"""
 \bottomrule

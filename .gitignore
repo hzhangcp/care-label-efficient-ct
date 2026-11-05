@@ -1,0 +1,16 @@
+data/
+runs/
+results/
+outputs/
+data_dummy/
+data_dummy_msd/
+__pycache__/
+*.pyc
+logs/
+dist/
+paper/manuscript/*.pdf
+paper/manuscript/*.aux
+paper/manuscript/*.bbl
+paper/manuscript/*.blg
+paper/manuscript/*.log
+paper/manuscript/*.out

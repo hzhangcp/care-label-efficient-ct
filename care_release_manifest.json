@@ -1,0 +1,19 @@
+{
+  "release": "DataV6",
+  "downloaded": "2026-09-15",
+  "hash_scope": "SHA-256 of sorted split-relative .npz paths; file contents are not hashed",
+  "splits": {
+    "train": {
+      "n_cases": 318,
+      "n_slices": 26656,
+      "file_list_sha256": "29adf84e7507f1e6bcd2cfa793e6d57edd5da66df450baabbb605f3549673978"
+    },
+    "test": {
+      "n_cases": 81,
+      "n_slices": 6461,
+      "file_list_sha256": "c5e24e33fc673577be8175259564bbcf942936c1b1e19328434d55ee9a93dff0"
+    }
+  },
+  "total_cases": 399,
+  "total_slices": 33117
+}
